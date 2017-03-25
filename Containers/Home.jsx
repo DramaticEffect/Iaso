@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import AppBar from 'material-ui/AppBar';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import {deepOrange500} from 'material-ui/styles/colors';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import * as colors from 'material-ui/styles/colors';
+import darkbaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 
 const styles = {
   container: {
@@ -13,7 +14,8 @@ const styles = {
 
 const muiTheme = getMuiTheme({
   palette: {
-    accent1Color: deepOrange500,
+    accent1Color: colors.deepOrange500,
+    primary1Color: colors.pink400,
   }
 })
 

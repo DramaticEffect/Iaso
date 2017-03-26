@@ -27,17 +27,7 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    const bologna = { headers: {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Credentials': true,
-    'Access-Control-Allow-Methods': 'POST, GET, PUT, DELETE, OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type',
-    } };
-    console.log("WQEWQEQWE");
-    api.getPatients();
-    // axios.get('http://localhost:3000/patients',bologna).then(whatever => {
-    //   console.log("SHIT: " + JSON.stringify(whatever));
-    // });
+    api.getPatients().then((data) => console.log(JSON.stringify(data)));
   }
 
   render() {

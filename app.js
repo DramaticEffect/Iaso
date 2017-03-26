@@ -10,7 +10,7 @@ injectTapEventPlugin();
 render(
   <Router history={browserHistory}>
     <Route component={Home}>
-      <Route path='/' component={Submit}/>
+      <Route path='/' component={Records}/>
     </Route>
   </Router>,
   document.getElementById('app')

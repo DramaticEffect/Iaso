@@ -1,9 +1,16 @@
 import React from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
+import {Link} from 'react-router';
 
 export default class SubmitRecord extends React.Component {
-    state = {};
+    state = {
+        code: '',
+    };
+
+    handleChange = (event) => {
+        this.setState({code: event.target.value});
+    };
 
     render = () => {
         const flexStyle = {
@@ -15,8 +22,11 @@ export default class SubmitRecord extends React.Component {
 
         return (
             <div style={flexStyle}>
-                <TextField hintText="Enter Patient Code" />
-                <RaisedButton label="Find Records" primary="true" />
+                <TextField  hintText="Enter Patient Code"
+                            value={this.state.code}
+                            onChange={this.handleChange} />
+                <RaisedButton label="Find Records" primary={true} />
+                <Link to={`/records`}>skip</Link>
             </div>
         );
     }

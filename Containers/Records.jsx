@@ -14,11 +14,16 @@ class Records extends Component {
     super(props);
     this.headings = {
       vaccine: 'Vaccine',
-      date: 'Date Given',
+      date: 'Date Received',
       doctor: 'Administered By',
       nextDate: 'Next Date'
     };
     this.state = {
+      patient: {
+        firstName: 'Gringle',
+        lastName: 'Fringleberry',
+        birthDate: '5-1-1961',
+      },
       data: [
         {
           vaccine: {
@@ -61,6 +66,14 @@ class Records extends Component {
             displaySelectAll={false}
           >
             <TableRow>
+              <TableHeaderColumn colSpan='2' style={{textAlign: 'right'}}>
+                {["Patient Name:", this.state.patient.firstName, this.state.patient.lastName].join(' ')}
+              </TableHeaderColumn>
+              <TableHeaderColumn colSpan='2'>
+                {"Birth Date: " + this.state.patient.birthDate}
+              </TableHeaderColumn>
+            </TableRow>
+            <TableRow>
               {Object.keys(this.headings).map((key) => 
                 <TableHeaderColumn>{this.headings[key]}</TableHeaderColumn>
               )}
@@ -78,7 +91,7 @@ class Records extends Component {
               )}
           </TableBody>
         </Table>
-        <Submit/>
+        <Submit patient={this.state.patient} records={this.state.data}/>
       </div>
     );
   }

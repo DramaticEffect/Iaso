@@ -4,7 +4,7 @@ import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import DatePicker from 'material-ui/DatePicker';
-//import Divider from 'material-ui/Divider';
+import {List, ListItem} from 'material-ui';
 
 const customContentStyle = {
   width: '80%',
@@ -13,9 +13,6 @@ const customContentStyle = {
 
 const recordFields = {
     //keys and inital values
-    firstName: '',
-    lastName: '',
-    birthDate: null,
     vaccine: '',
     vaccineType: '',
     doctor: '',
@@ -52,11 +49,11 @@ export default class SubmitRecord extends React.Component {
     }
 
     handleSubmit = () =>{
-        let {firstName, lastName, birthDate} = this.state; //TODO: pass in from props instead
+        let {firstName, lastName, birthDate} = this.props.patient;
 
         let {vaccine, vaccineType, doctor, dateReceived} = this.state;
 
-        let records = []; //TODO: get this from app
+        let records = this.props.records;
         records.push({vaccine, vaccineType, doctor, dateReceived});
         let data = {
             firstName,
@@ -82,8 +79,6 @@ export default class SubmitRecord extends React.Component {
                 onClick={this.handleSubmit}
             />,
         ];
-        //TODO: fix first, last, and birthdate so it is stored based on current accessed patient
-        // no need to retype every time
         return (
             <div>
                 <RaisedButton label="Create New Record" onClick={this.handleOpen} />
@@ -92,19 +87,9 @@ export default class SubmitRecord extends React.Component {
                 actions={actions}
                 modal={false}
                 open={this.state.open}
-                contentStyle={customContentStyle}>   
+                contentStyle={customContentStyle}>
+                    <div>{this.props.patient.firstName + ' ' + this.props.patient.lastName}</div>  
                     <div onChange={this.handleChange}>
-                        <TextField  data-key='firstName'
-                                    floatingLabelText='First Name'
-                                    value={this.state.firstName} />
-                        <TextField  data-key='lastName'
-                                    floatingLabelText='Last Name' 
-                                    value={this.state.lastName} />
-                        <DatePicker data-key='birthDate'
-                                    floatingLabelText='Birth Date'
-                                    value={this.state.birthDate}
-                                    onChange={this.handleBirthDate} />
-                        <br />
                         <TextField  data-key='vaccine'
                                     floatingLabelText='Vaccine' 
                                     value={this.state.vaccine} />

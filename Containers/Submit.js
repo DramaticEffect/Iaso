@@ -4,6 +4,7 @@ import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import DatePicker from 'material-ui/DatePicker';
+//import Divider from 'material-ui/Divider';
 
 const customContentStyle = {
   width: '80%',
@@ -24,7 +25,7 @@ const recordFields = {
 export default class SubmitRecord extends React.Component {
     state = {
         open: false,
-        ...recordFields //es6 destructured assignment to extend state
+        ...recordFields //es6 spreading to extend state
     };
     
     handleOpen = () => {
@@ -103,7 +104,7 @@ export default class SubmitRecord extends React.Component {
                                     floatingLabelText='Birth Date'
                                     value={this.state.birthDate}
                                     onChange={this.handleBirthDate} />
-                        <br/>
+                        <br />
                         <TextField  data-key='vaccine'
                                     floatingLabelText='Vaccine' 
                                     value={this.state.vaccine} />
@@ -122,4 +123,4 @@ export default class SubmitRecord extends React.Component {
             </div>
         );
     };
-}
+};

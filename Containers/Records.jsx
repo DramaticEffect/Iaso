@@ -91,7 +91,7 @@ class Records extends Component {
               )}
           </TableBody>
         </Table>
-        <Submit patient={this.state.patient}/>
+        <Submit patient={this.state.patient} records={this.state.data}/>
       </div>
     );
   }

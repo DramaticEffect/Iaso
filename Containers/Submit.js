@@ -49,11 +49,11 @@ export default class SubmitRecord extends React.Component {
     }
 
     handleSubmit = () =>{
-        let {firstName, lastName, birthDate} = this.state; //TODO: pass in from props instead
+        let {firstName, lastName, birthDate} = this.props.patient;
 
         let {vaccine, vaccineType, doctor, dateReceived} = this.state;
 
-        let records = []; //TODO: get this from app
+        let records = this.props.records;
         records.push({vaccine, vaccineType, doctor, dateReceived});
         let data = {
             firstName,
@@ -79,9 +79,6 @@ export default class SubmitRecord extends React.Component {
                 onClick={this.handleSubmit}
             />,
         ];
-        console.log(this.props)
-        //TODO: fix first, last, and birthdate so it is stored based on current accessed patient
-        // no need to retype every time
         return (
             <div>
                 <RaisedButton label="Create New Record" onClick={this.handleOpen} />

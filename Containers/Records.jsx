@@ -8,6 +8,7 @@ import {
   TableRowColumn,
 } from 'material-ui/Table';
 import Submit from './Submit';
+import patientHack from '../patienthack.js';
 
 class Records extends Component {
   constructor(props) {
@@ -21,8 +22,8 @@ class Records extends Component {
     this.state = {
       patient: {
         firstName: 'Gringle',
-        lastName: 'Fringleberry',
-        birthDate: '5-1-1961',
+        lastName: 'Fingleberry',
+        birthdate: '5-1-1961',
       },
       data: [
         {
@@ -58,6 +59,7 @@ class Records extends Component {
   }
 
   render() {
+    console.log(patientHack.data);
     return (
       <div>
         <Table>
@@ -67,10 +69,10 @@ class Records extends Component {
           >
             <TableRow>
               <TableHeaderColumn colSpan='2' style={{textAlign: 'right'}}>
-                {["Patient Name:", this.state.patient.firstName, this.state.patient.lastName].join(' ')}
+                {["Patient Name:", this.props.patientData.firstName, this.props.patientData.lastName].join(' ')}
               </TableHeaderColumn>
               <TableHeaderColumn colSpan='2'>
-                {"Birth Date: " + this.state.patient.birthDate}
+                {"Birth Date: " + this.props.patientData.birthdate}
               </TableHeaderColumn>
             </TableRow>
             <TableRow>
@@ -80,7 +82,7 @@ class Records extends Component {
             </TableRow>
           </TableHeader>
           <TableBody displayRowCheckbox={false}>
-              {this.state.data.map((record) => 
+              {this.props.patientData.records.map((record) => 
                 <TableRow>
                   {Object.keys(record).map((column) => 
                    (column === 'vaccine') ?
@@ -91,7 +93,7 @@ class Records extends Component {
               )}
           </TableBody>
         </Table>
-        <Submit patient={this.state.patient} records={this.state.data}/>
+        <Submit patient={this.state.patient} records={this.state.data} updatePatient={this.props.updatePatient}/>
       </div>
     );
   }

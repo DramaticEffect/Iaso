@@ -8,6 +8,7 @@ import {
   TableRowColumn,
 } from 'material-ui/Table';
 import Submit from './Submit';
+import patientHack from '../patienthack.js';
 
 class Records extends Component {
   constructor(props) {
@@ -58,6 +59,7 @@ class Records extends Component {
   }
 
   render() {
+    console.log(patientHack.data);
     return (
       <div>
         <Table>

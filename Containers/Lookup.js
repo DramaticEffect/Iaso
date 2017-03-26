@@ -2,6 +2,9 @@ import React from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import {Link} from 'react-router';
+import helpers from '../Services/api.js';
+import {hashHistory} from 'react-router';
+import patientHack from '../patienthack.js';
 
 export default class SubmitRecord extends React.Component {
     state = {
@@ -10,10 +13,18 @@ export default class SubmitRecord extends React.Component {
 
     lookup = () => {
         console.log(this.state.code);
+        
+        // helpers.getPatient(this.state.code)
+        //     .then((response)=>{
+        //         patientHack.data = response.data;
+        //         hashHistory.push('/records');
+        //     });
+        patientHack.data = {lol: 'wut'};
+        hashHistory.push('/records');
     };
 
     handleChange = (event) => {
-        this.setState({code: event.target.value});
+        this.setState({code: event.target.value})
     };
 
     render = () => {
@@ -30,7 +41,6 @@ export default class SubmitRecord extends React.Component {
                             value={this.state.code}
                             onChange={this.handleChange} />
                 <RaisedButton label="Find Records" primary={true} onClick={this.lookup}/>
-                <Link to={`/records`}>skip</Link>
             </div>
         );
     }

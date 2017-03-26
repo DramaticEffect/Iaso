@@ -8,6 +8,10 @@ export default class SubmitRecord extends React.Component {
         code: '',
     };
 
+    lookup = () => {
+        console.log(this.state.code);
+    };
+
     handleChange = (event) => {
         this.setState({code: event.target.value});
     };
@@ -25,7 +29,7 @@ export default class SubmitRecord extends React.Component {
                 <TextField  hintText="Enter Patient Code"
                             value={this.state.code}
                             onChange={this.handleChange} />
-                <RaisedButton label="Find Records" primary={true} />
+                <RaisedButton label="Find Records" primary={true} onClick={this.lookup}/>
                 <Link to={`/records`}>skip</Link>
             </div>
         );

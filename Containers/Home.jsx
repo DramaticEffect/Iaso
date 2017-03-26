@@ -5,6 +5,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import * as colors from 'material-ui/styles/colors';
 
 import api from '../Services/api.js';
+import axios from 'axios';
 
 const styles = {
   container: {
@@ -18,11 +19,15 @@ const muiTheme = getMuiTheme({
     accent1Color: colors.deepOrange500,
     primary1Color: colors.pink400,
   }
-})
+});
 
 class Home extends Component {
   constructor(props) {
     super(props);
+  }
+
+  componentDidMount() {
+    api.getPatients().then((data) => console.log(JSON.stringify(data)));
   }
 
   render() {

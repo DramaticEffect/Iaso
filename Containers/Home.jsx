@@ -3,7 +3,6 @@ import AppBar from 'material-ui/AppBar';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import * as colors from 'material-ui/styles/colors';
-import darkbaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 
 const styles = {
   container: {

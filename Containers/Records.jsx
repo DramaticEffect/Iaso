@@ -7,6 +7,7 @@ import {
   TableRow, 
   TableRowColumn,
 } from 'material-ui/Table';
+import Submit from './Submit';
 
 class Records extends Component {
   constructor(props) {
@@ -53,29 +54,32 @@ class Records extends Component {
 
   render() {
     return (
-      <Table>
-        <TableHeader 
-          adjustForCheckbox={false}
-          displaySelectAll={false}
-        >
-          <TableRow>
-            {Object.keys(this.headings).map((key) => 
-              <TableHeaderColumn>{this.headings[key]}</TableHeaderColumn>
-            )}
-          </TableRow>
-        </TableHeader>
-        <TableBody displayRowCheckbox={false}>
-            {this.state.data.map((record) => 
-              <TableRow>
-                {Object.keys(record).map((column) => 
-                 (column === 'vaccine') ?
-                   <TableRowColumn>{record[column].name}</TableRowColumn> :
-                   <TableRowColumn>{record[column]}</TableRowColumn> 
-                )}
-              </TableRow>
-            )}
-        </TableBody>
-      </Table>
+      <div>
+        <Table>
+          <TableHeader 
+            adjustForCheckbox={false}
+            displaySelectAll={false}
+          >
+            <TableRow>
+              {Object.keys(this.headings).map((key) => 
+                <TableHeaderColumn>{this.headings[key]}</TableHeaderColumn>
+              )}
+            </TableRow>
+          </TableHeader>
+          <TableBody displayRowCheckbox={false}>
+              {this.state.data.map((record) => 
+                <TableRow>
+                  {Object.keys(record).map((column) => 
+                   (column === 'vaccine') ?
+                     <TableRowColumn>{record[column].name}</TableRowColumn> :
+                     <TableRowColumn>{record[column]}</TableRowColumn> 
+                  )}
+                </TableRow>
+              )}
+          </TableBody>
+        </Table>
+        <Submit/>
+      </div>
     );
   }
 }

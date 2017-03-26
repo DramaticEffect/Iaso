@@ -24,7 +24,7 @@ const recordFields = {
 export default class SubmitRecord extends React.Component {
     state = {
         open: false,
-        ...recordFields
+        ...recordFields //es6 destructured assignment to extend state
     };
     
     handleOpen = () => {
@@ -55,7 +55,7 @@ export default class SubmitRecord extends React.Component {
 
         let {vaccine, vaccineType, doctor, dateReceived} = this.state;
 
-        let records = []; //get this from app
+        let records = []; //TODO: get this from app
         records.push({vaccine, vaccineType, doctor, dateReceived});
         let data = {
             firstName,

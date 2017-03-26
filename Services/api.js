@@ -3,28 +3,34 @@ import axios from 'axios';
 const api = axios.create({
   baseURL: 'http://localhost:3000/patients/',
   timeout: 1000,
+  headers: {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Credentials': true,
+    'Access-Control-Allow-Methods': 'POST, GET, PUT, DELETE, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type',
+  }
 });
 
-const log = (data) => console.log(data);
+const justData = (res) => res.data;
 
 export default {
   getPatients: () => {
-    return axios.get().then(log);
+    return api.get('').then(justData);
   },
   getPatient: (id) => {
-    return axios.get(id).then(log);
+    return api.get(id).then(justData);
 
   },
   getRecords: (patientId) => {
-    return axios.get(`${patientId}/records/`).then(log);
+    return api.get(`${patientId}/records/`).then(justData);
   },
 
   addPatient: (data) => {
-    return axios.post().then(log);
+    return api.post();
 
   },
   setRecords: (patientId) => {
-    return axios.patch(`${patientId}/records/`).then(log);
+    return api.patch(`${patientId}/records/`);
   }
 
 };

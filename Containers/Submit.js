@@ -6,13 +6,25 @@ import TextField from 'material-ui/TextField';
 import DatePicker from 'material-ui/DatePicker';
 
 const customContentStyle = {
-  width: '90%',
+  width: '80%',
   maxWidth: 'none',
 };
+
+const recordFields = {
+    //keys and inital values
+    firstName: '',
+    lastName: '',
+    birthDate: null,
+    vaccine: '',
+    vaccineType: '',
+    doctor: '',
+    dateReceived: null,
+}
 
 export default class SubmitRecord extends React.Component {
     state = {
         open: false,
+        ...recordFields
     };
     
     handleOpen = () => {
@@ -22,6 +34,39 @@ export default class SubmitRecord extends React.Component {
     handleClose = () => {
         this.setState({open: false});
     };
+
+    handleChange = (event, date) => {
+        let key = event.target.getAttribute('data-key');
+        let update = {}
+        update[key] = event.target.value;
+        this.setState(update);
+    }
+
+    handleBirthDate = (event, date) => {
+        this.setState({birthDate: date});
+    }
+
+    handleDateReceived = (event, date) =>{
+        this.setState({dateReceived: date});
+    }
+
+    handleSubmit = () =>{
+        let {firstName, lastName, birthDate} = this.state; //TODO: pass in from props instead
+
+        let {vaccine, vaccineType, doctor, dateReceived} = this.state;
+
+        let records = []; //get this from app
+        records.push({vaccine, vaccineType, doctor, dateReceived});
+        let data = {
+            firstName,
+            lastName,
+            birthDate,
+            records,
+        }
+        console.log(data);
+
+        this.handleClose();
+    }
 
     render () {
         const actions = [
@@ -33,10 +78,11 @@ export default class SubmitRecord extends React.Component {
             <FlatButton
                 label="Submit"
                 primary={true}
-                onClick={this.handleClose}
+                onClick={this.handleSubmit}
             />,
         ];
-
+        //TODO: fix first, last, and birthdate so it is stored based on current accessed patient
+        // no need to retype every time
         return (
             <div>
                 <RaisedButton label="Create New Record" onClick={this.handleOpen} />
@@ -45,16 +91,33 @@ export default class SubmitRecord extends React.Component {
                 actions={actions}
                 modal={false}
                 open={this.state.open}
-                contentStyle={customContentStyle}
-                >
-                    <TextField hintText='First Name' />
-                    <TextField hintText='Last Name' />
-                    <DatePicker hintText='Birth Date' />
-                    <br/>
-                    <TextField hintText='Vaccine' />
-                    <TextField hintText='Type' />
-                    <TextField hintText='Doctor' />
-                    <DatePicker hintText='Date Recieved'/>
+                contentStyle={customContentStyle}>   
+                    <div onChange={this.handleChange}>
+                        <TextField  data-key='firstName'
+                                    floatingLabelText='First Name'
+                                    value={this.state.firstName} />
+                        <TextField  data-key='lastName'
+                                    floatingLabelText='Last Name' 
+                                    value={this.state.lastName} />
+                        <DatePicker data-key='birthDate'
+                                    floatingLabelText='Birth Date'
+                                    value={this.state.birthDate}
+                                    onChange={this.handleBirthDate} />
+                        <br/>
+                        <TextField  data-key='vaccine'
+                                    floatingLabelText='Vaccine' 
+                                    value={this.state.vaccine} />
+                        <TextField  data-key='vaccineType'
+                                    floatingLabelText='Vaccine Type'
+                                    value={this.state.vaccineType} />
+                        <TextField  data-key='doctor'
+                                    floatingLabelText='Doctor'
+                                    value={this.state.doctor} />
+                        <DatePicker data-key='dateReceived'
+                                    floatingLabelText='Date Received'
+                                    value={this.state.dateReceived}
+                                    onChange={this.handleDateReceived} />
+                    </div>
                 </Dialog>
             </div>
         );

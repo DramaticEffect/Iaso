@@ -24,6 +24,13 @@ const muiTheme = getMuiTheme({
 class Home extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      patient: {birthDate: '4-20-1969'},
+    }
+  }
+
+  updatePatient = (data) => {
+    this.setState({patient: data});
   }
 
   componentDidMount() {
@@ -37,7 +44,7 @@ class Home extends Component {
           <AppBar 
             title='Iaso'
           />
-          {this.props.children}
+          {React.cloneElement(this.props.children, { updatePatient: this.updatePatient, patientData: this.state.patient })}
         </div>
       </MuiThemeProvider>
     );

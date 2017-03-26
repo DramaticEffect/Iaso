@@ -5,6 +5,8 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import DatePicker from 'material-ui/DatePicker';
 import {List, ListItem} from 'material-ui';
+import helpers from '../Services/api.js';
+//import patientHack from '../patientHack';
 
 const customContentStyle = {
   width: '80%',
@@ -40,16 +42,12 @@ export default class SubmitRecord extends React.Component {
         this.setState(update);
     }
 
-    handleBirthDate = (event, date) => {
-        this.setState({birthDate: date});
-    }
-
     handleDateReceived = (event, date) =>{
         this.setState({dateReceived: date});
     }
 
     handleSubmit = () =>{
-        let {firstName, lastName, birthDate} = this.props.patient;
+        let {firstName, lastName, birthdate} = this.props.patient;
 
         let {vaccine, vaccineType, doctor, dateReceived} = this.state;
 
@@ -58,10 +56,15 @@ export default class SubmitRecord extends React.Component {
         let data = {
             firstName,
             lastName,
-            birthDate,
+            birthdate,
             records,
         }
         console.log(data);
+
+        helpers.setRecords(data)
+        .then( response => {
+            this.props.updatePatient(response.data);
+        });
 
         this.handleClose();
     }

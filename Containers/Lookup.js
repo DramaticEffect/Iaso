@@ -4,7 +4,7 @@ import TextField from 'material-ui/TextField';
 import {Link} from 'react-router';
 import helpers from '../Services/api.js';
 import {hashHistory} from 'react-router';
-import patientHack from '../patienthack.js';
+//import patientHack from '../patienthack.js';
 
 export default class SubmitRecord extends React.Component {
     state = {
@@ -12,15 +12,12 @@ export default class SubmitRecord extends React.Component {
     };
 
     lookup = () => {
-        console.log(this.state.code);
-        
-        // helpers.getPatient(this.state.code)
-        //     .then((response)=>{
-        //         patientHack.data = response.data;
-        //         hashHistory.push('/records');
-        //     });
-        patientHack.data = {lol: 'wut'};
-        hashHistory.push('/records');
+        helpers.getPatient(this.state.code)
+            .then((response)=>{
+                console.log(response);
+                this.props.updatePatient(response);
+                hashHistory.push('/records');
+            });
     };
 
     handleChange = (event) => {
